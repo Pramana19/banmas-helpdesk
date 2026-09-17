@@ -3,14 +3,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
+                <!-- Logo menggunakan PNG Lokal -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
+                        <img src="{{ asset('images/logo-sawit.png') }}" class="h-9 w-auto object-contain" alt="Logo Sawit">
+                        <span class="font-extrabold text-[#12544F] tracking-tight text-lg">BanMas</span>
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Navigation Links (Kelola Teknisi Dihapus) -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -18,15 +19,11 @@
                     <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.*')">
                         {{ __('Tiket Bantuan') }}
                     </x-nav-link>
-                    <!-- Menu Khusus Admin -->
                     @if (auth()->user()->role === 'admin')
-                        <x-nav-link :href="'#'" :active="false">
-                            {{ __('Kelola Teknisi') }}
-                        </x-nav-link>
-                        <x-nav-link :href="'#'" :active="false">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                             {{ __('Kelola User') }}
                         </x-nav-link>
-                        <x-nav-link :href="'#'" :active="false">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                             {{ __('Kategori Tiket') }}
                         </x-nav-link>
                     @endif

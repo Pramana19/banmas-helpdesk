@@ -12,11 +12,21 @@ class TicketController extends Controller
     // 1. Menampilkan daftar tiket (Bisa bedakan Admin vs User)
     public function index()
     {
-        if (auth()->user()->role === 'admin') {
+        $user = auth()->user();
+
+        if ($user->role === 'admin') {
+            // Admin bisa melihat semua daftar tiket
             $tickets = Ticket::with('category')->latest()->get();
-        } else {
+        } elseif ($user->role === 'teknisi') {
+            // Teknisi bisa melihat tiket yang dia laporkan SENDIRI atau yang DITUGASKAN kepadanya
             $tickets = Ticket::with('category')
-                        ->where('reporter_id', auth()->id())
+                        ->where('reporter_id', $user->id)
+                        ->orWhere('technician_id', $user->id)
+                        ->latest()->get();
+        } else {
+            // Karyawan biasa / user hanya melihat tiket yang dia laporkan
+            $tickets = Ticket::with('category')
+                        ->where('reporter_id', $user->id)
                         ->latest()->get();
         }
 
@@ -54,13 +64,19 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::with('category')->findOrFail($id);
+        $user = auth()->user();
 
-        if ($ticket->reporter_id !== auth()->id() && auth()->user()->role !== 'admin') {
+        // Teknisi boleh buka jika dia pelapor ATAU teknisi yang ditugaskan
+        $isAuthorized = ($ticket->reporter_id === $user->id) || 
+                        ($ticket->technician_id === $user->id) || 
+                        ($user->role === 'admin');
+
+        if (!$isAuthorized) {
             abort(403, 'Kamu tidak memiliki akses ke tiket ini.');
         }
 
         $technicians = [];
-        if (auth()->user()->role === 'admin') {
+        if ($user->role === 'admin') {
             $technicians = User::where('role', 'teknisi')->get();
         }
 
@@ -83,6 +99,20 @@ class TicketController extends Controller
 
         $ticket->update($validated);
 
-        return redirect()->route('tickets.show', $ticket->id)->with('success', 'Status tiket berhasil diperbarui!');
+        return redirect()->route('tickets.index')->with('success', 'Status tiket berhasil diperbarui!');
+    }
+
+    // 6. Menghapus tiket permanen (Khusus Admin)
+    public function destroy($id)
+    {
+        $ticket = Ticket::findOrFail($id);
+
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Hanya Admin yang berhak menghapus data tiket.');
+        }
+
+        $ticket->delete();
+
+        return redirect()->route('tickets.index')->with('success', 'Tiket berhasil dihapus secara permanen.');
     }
 }
