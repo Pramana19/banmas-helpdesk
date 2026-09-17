@@ -13,7 +13,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
-            <!-- Tambahan: Pesan Sukses jika status berhasil diupdate -->
+            <!-- Pesan Sukses jika status berhasil diupdate -->
             @if(session('success'))
                 <div class="mb-4 bg-emerald-100 border border-emerald-400 text-emerald-700 px-4 py-3 rounded relative" role="alert">
                     <span class="block sm:inline">{{ session('success') }}</span>
@@ -49,13 +49,37 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 p-4 rounded-md border">
+                <!-- ========================================== -->
+                <!-- SISIPAN BARU: Informasi Pelapor & Teknisi -->
+                <!-- ========================================== -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pt-4 border-t border-gray-200">
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider">Dilaporkan Oleh (Pelapor)</span>
+                        <span class="text-sm font-semibold text-[#12544F]">
+                            {{ $ticket->reporter->name ?? 'Tidak diketahui' }} 
+                            <span class="text-xs text-gray-500 font-normal">({{ $ticket->reporter->email ?? '-' }})</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider">Teknisi Bertugas</span>
+                        <span class="text-sm font-semibold text-[#12544F]">
+                            @if($ticket->technician)
+                                <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs font-bold">{{ $ticket->technician->name }}</span>
+                            @else
+                                <span class="text-gray-400 italic">-- Belum Ditugaskan --</span>
+                            @endif
+                        </span>
+                    </div>
+                </div>
+                <!-- ========================================== -->
+
+                <div class="bg-gray-50 p-4 rounded-md border mb-6">
                     <p class="text-sm text-gray-500 font-medium mb-2">Deskripsi Masalah</p>
                     <p class="text-gray-900 whitespace-pre-line">{{ $ticket->description }}</p>
                 </div>
 
                 <!-- ========================================== -->
-                <!-- MULAI DARI SINI: Form Tindak Lanjut Admin  -->
+                <!-- Form Tindak Lanjut Admin/Teknisi           -->
                 <!-- ========================================== -->
                 @if(auth()->user()->role === 'admin' || auth()->user()->role === 'teknisi')
                 <div class="mt-8 border-t pt-6">
@@ -100,9 +124,6 @@
                     </form>
                 </div>
                 @endif
-                <!-- ========================================== -->
-                <!-- BATAS AKHIR FORM TINDAK LANJUT             -->
-                <!-- ========================================== -->
 
             </div>
         </div>

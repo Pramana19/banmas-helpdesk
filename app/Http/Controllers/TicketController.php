@@ -63,7 +63,7 @@ class TicketController extends Controller
     // 4. Menampilkan halaman detail tiket
     public function show($id)
     {
-        $ticket = Ticket::with('category')->findOrFail($id);
+        $ticket = Ticket::with(['category', 'reporter', 'technician'])->findOrFail($id);
         $user = auth()->user();
 
         // Teknisi boleh buka jika dia pelapor ATAU teknisi yang ditugaskan
