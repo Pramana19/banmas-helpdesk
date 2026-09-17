@@ -15,19 +15,23 @@ class TicketController extends Controller
         $user = auth()->user();
 
         if ($user->role === 'admin') {
-            // Admin bisa melihat semua daftar tiket
-            $tickets = Ticket::with('category')->latest()->get();
+            // Admin: Melihat semua tiket dari awal sampai akhir
+            $tickets = Ticket::latest()->get();
+            
         } elseif ($user->role === 'teknisi') {
-            // Teknisi bisa melihat tiket yang dia laporkan SENDIRI atau yang DITUGASKAN kepadanya
-            $tickets = Ticket::with('category')
-                        ->where('reporter_id', $user->id)
-                        ->orWhere('technician_id', $user->id)
-                        ->latest()->get();
+            // Teknisi: Melihat tiket yang ditugaskan kepadanya 
+            // TETAPI sembunyikan yang statusnya sudah selesai/ditolak
+            $tickets = Ticket::where(function($query) use ($user) {
+                $query->where('technician_id', $user->id)
+                      ->whereNotIn('status', ['Rejected', 'Resolved', 'Closed']);
+            })->orWhere(function($query) use ($user) {
+                // Tambahan: Jika teknisi membuat tiketnya sendiri sebagai pelapor, tetap tampilkan semua
+                $query->where('reporter_id', $user->id);
+            })->latest()->get();
+            
         } else {
-            // Karyawan biasa / user hanya melihat tiket yang dia laporkan
-            $tickets = Ticket::with('category')
-                        ->where('reporter_id', $user->id)
-                        ->latest()->get();
+            // Karyawan (User): Melihat semua riwayat tiket miliknya sendiri
+            $tickets = Ticket::where('reporter_id', $user->id)->latest()->get();
         }
 
         return view('tickets.index', compact('tickets'));
