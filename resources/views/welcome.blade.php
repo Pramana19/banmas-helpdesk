@@ -24,7 +24,7 @@
             
             <div class="mb-6 flex justify-center">
                 <!-- Ikon -->
-                <img src="{{ asset('images/logo-sawit.png') }}" alt="Logo Sawit" class="w-16 h-16 object-contain">
+                <img src="{{ asset('images/logo-sawit.png') }}" alt="Logo Sawit" class="w-36 h-36 object-contain">
             </div>
             
             <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#12544F]">BanMas Helpdesk</h1>
@@ -33,7 +33,7 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/tickets') }}" class="px-8 py-3 rounded-md bg-[#b5926b] text-white font-bold hover:bg-[#9d7d59] transition-all shadow-md">
+                        <a href="{{ url('/dashboard') }}" class="px-8 py-3 rounded-md bg-[#b5926b] text-white font-bold hover:bg-[#9d7d59] transition-all shadow-md">
                             Masuk ke Dashboard
                         </a>
                     @else

@@ -5,9 +5,8 @@
             <div class="flex">
                 <!-- Logo menggunakan PNG Lokal -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-                        <img src="{{ asset('images/logo-sawit.png') }}" class="h-9 w-auto object-contain" alt="Logo Sawit">
-                        <span class="font-extrabold text-[#12544F] tracking-tight text-lg">BanMas</span>
+                    <a href="{{ url('/') }}">
+                        <img src="{{ asset('images/logo-sawit.png') }}" alt="Logo Sawit" class="block h-9 w-auto object-contain">
                     </a>
                 </div>
 
