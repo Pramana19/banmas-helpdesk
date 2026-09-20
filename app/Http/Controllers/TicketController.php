@@ -40,7 +40,17 @@ class TicketController extends Controller
     // 2. Menampilkan form buat tiket baru
     public function create()
     {
-        $categories = Category::all();
+        // Ambil semua kategori kecuali "Other", urutkan A-Z
+        $regularCategories = Category::where('name', '!=', 'Other')
+                                     ->orderBy('name', 'asc')
+                                     ->get();
+
+        // Cari kategori "Other" saja
+        $otherCategory = Category::where('name', 'Other')->get();
+
+        // Gabungkan keduanya ("Other" diletakkan di akhir)
+        $categories = $regularCategories->concat($otherCategory);
+
         return view('tickets.create', compact('categories'));
     }
 

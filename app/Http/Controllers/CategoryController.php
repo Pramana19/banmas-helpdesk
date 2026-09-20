@@ -12,7 +12,16 @@ class CategoryController extends Controller
         if (auth()->user()->role !== 'admin') {
             abort(403, 'Hanya Admin yang boleh mengakses halaman ini.');
         }
-        $categories = Category::latest()->get();
+        // Ambil semua kategori kecuali "Other", urutkan A-Z
+        $regularCategories = Category::where('name', '!=', 'Other')
+                                     ->orderBy('name', 'asc')
+                                     ->get();
+
+        // Cari kategori "Other" saja
+        $otherCategory = Category::where('name', 'Other')->get();
+
+        // Gabungkan keduanya ("Other" diletakkan di akhir)
+        $categories = $regularCategories->concat($otherCategory);
         return view('categories.index', compact('categories'));
     }
 
