@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-[#964734] dark:bg-slate-900 border-b border-[#783829] dark:border-slate-800 transition-colors duration-300 shadow-md">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 bg-[#964734] dark:bg-slate-900 border-b border-[#783829] dark:border-slate-800 transition-colors duration-300 shadow-md">
     <!-- Primary Navigation Menu -->
     <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
