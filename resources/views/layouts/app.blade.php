@@ -14,18 +14,10 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-[#E2E8F0] dark:bg-[#022140] text-[#022140] dark:text-slate-100 transition-colors duration-300">
+    <body class="font-sans antialiased bg-[#B3B4BD] dark:bg-[#022140] text-[#022140] dark:text-slate-100 transition-colors duration-300">
         <!-- Main Container -->
         <div class="min-h-screen relative flex flex-col">
-            
-            <!-- Ornamen Vektor -->
-            <div class="absolute inset-0 z-0 opacity-15 dark:opacity-5 pointer-events-none overflow-hidden fixed">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full">
-                    <path d="M100,100 C70,50 100,0 100,0 L100,100 Z" fill="#265077" />
-                    <path d="M0,0 L20,0 L0,20 Z" fill="#022140" />
-                </svg>
-            </div>
-
+                        
             <!-- Konten Utama di Atas Vektor -->
             <div class="relative z-10 flex-1 flex flex-col">
                 <!-- Navigasi Atas -->
@@ -45,7 +37,7 @@
                                 
                                 <!-- Bagian Atas: Judul Halaman & Tombol Aksi -->
                                 <div class="flex flex-col items-center justify-center text-center">
-                                    <div class="[&>div]:!flex-col [&>div]:!items-center [&>div]:!justify-center [&>div]:!gap-5 [&>div]:!w-full [&_h2]:text-[#0FA4AF] dark:[&_h2]:text-white dark:[&_h2]:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] [&_h2]:font-bold [&_h2]:text-lg [&_h2]:text-center transition-all w-full">
+                                <div class="[&>div]:!flex-col [&>div]:!items-center [&>div]:!justify-center [&>div]:!gap-5 [&>div]:!w-full [&_h2]:text-[#022140] dark:[&_h2]:text-white dark:[&_h2]:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] [&_h2]:font-bold [&_h2]:text-lg [&_h2]:text-center transition-all w-full">
                                         {{ $header }}
                                     </div>
                                 </div>

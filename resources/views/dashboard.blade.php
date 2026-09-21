@@ -24,11 +24,12 @@
                     <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 12h-2v2h2v-2zm-6 0h-2v2h2v-2zm-6 0H5v2h2v-2zm13-8H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h6v2H8v2h8v-2h-2v-2h6c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 12H4V6h16v10z"/></svg>
                 </div>
             </div>
-
+            
             <!-- Widget 4 Kartu Statistik -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Kartu Total -->
-                <div class="bg-[#12544F] text-[#EDEDCE] p-6 rounded-xl shadow-md flex items-center justify-between border-b-4 border-[#8BBB92]">
+                <!-- Kartu Total -->
+                <div class="bg-blue-700 text-white p-6 rounded-xl shadow-lg shadow-purple-500/40 dark:shadow-purple-900/60 flex items-center justify-between border-b-[6px] border-purple-600 dark:border-purple-400">
                     <div>
                         <p class="text-sm font-medium opacity-80 uppercase tracking-wider">Total Tiket</p>
                         <p class="text-4xl font-bold mt-1">{{ $totalTickets }}</p>
@@ -37,7 +38,7 @@
                 </div>
 
                 <!-- Kartu Open -->
-                <div class="bg-red-50 text-red-700 p-6 rounded-xl shadow-md flex items-center justify-between border-b-4 border-red-500">
+                <div class="bg-red-50 text-red-700 p-6 rounded-xl shadow-lg shadow-purple-500/40 dark:shadow-purple-900/60 flex items-center justify-between border-b-[6px] border-red-500">
                     <div>
                         <p class="text-sm font-medium opacity-80 uppercase tracking-wider">Menunggu (Open)</p>
                         <p class="text-4xl font-bold mt-1">{{ $openTickets }}</p>
@@ -46,7 +47,7 @@
                 </div>
 
                 <!-- Kartu Diproses -->
-                <div class="bg-yellow-50 text-yellow-700 p-6 rounded-xl shadow-md flex items-center justify-between border-b-4 border-yellow-500">
+                <div class="bg-yellow-50 text-yellow-700 p-6 rounded-xl shadow-lg shadow-purple-500/40 dark:shadow-purple-900/60 flex items-center justify-between border-b-[6px] border-yellow-500">
                     <div>
                         <p class="text-sm font-medium opacity-80 uppercase tracking-wider">Sedang Diproses</p>
                         <p class="text-4xl font-bold mt-1">{{ $processTickets }}</p>
@@ -55,7 +56,7 @@
                 </div>
 
                 <!-- Kartu Selesai -->
-                <div class="bg-[#8BBB92] text-[#12544F] p-6 rounded-xl shadow-md flex items-center justify-between border-b-4 border-[#12544F]">
+                <div class="bg-[#78b481] text-[#12544F] p-6 rounded-xl shadow-lg shadow-purple-500/40 dark:shadow-purple-900/60 flex items-center justify-between border-b-[6px] border-[#12544F] dark:border-[#0f980f]">
                     <div>
                         <p class="text-sm font-medium opacity-90 uppercase tracking-wider">Selesai (Resolved)</p>
                         <p class="text-4xl font-bold mt-1">{{ $resolvedTickets }}</p>
@@ -68,7 +69,6 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
                 <!-- Tabel 5 Tiket Terbaru -->
-                <!-- Magic Logic: Tabel jadi 3 kolom (penuh) kalau Karyawan, 2 kolom kalau Admin/Teknisi -->
                 <div class="{{ auth()->user()->role !== 'user' ? 'lg:col-span-2' : 'lg:col-span-3' }} bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-[#8BBB92]/40 p-6 overflow-x-auto">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-[#12544F]">Tiket Terbaru</h3>
