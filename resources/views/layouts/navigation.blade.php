@@ -49,9 +49,21 @@
                 <!-- Dropdown Profil User -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-white/20 dark:border-slate-700 text-sm leading-4 font-medium rounded-lg text-white bg-white/10 dark:bg-slate-800 hover:bg-white/20 dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-                            <div class="ms-1">
+                        <button class="inline-flex items-center p-1 border border-white/20 dark:border-slate-700 text-sm leading-4 font-medium rounded-full text-white bg-white/10 dark:bg-slate-800 hover:bg-white/20 dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
+                            
+                            <!-- Logika Penampil Avatar Mini -->
+                            @if(Auth::user()->avatar)
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Profile" class="h-8 w-8 rounded-full object-cover">
+                            @else
+                                <div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                            @endif
+
+                            <!-- Ikon Panah Dropdown -->
+                            <div class="ms-2 me-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
