@@ -9,29 +9,28 @@ use App\Models\User;
 
 class TicketController extends Controller
 {
-    // 1. Menampilkan daftar tiket (Bisa bedakan Admin vs User)
+    // 1. Menampilkan daftar tiket (Bisa bedakan Admin vs User)    
     public function index()
     {
         $user = auth()->user();
 
         if ($user->role === 'admin') {
-            // Admin: Melihat semua tiket dari awal sampai akhir
-            $tickets = Ticket::latest()->get();
+            // Admin: Eager load relasi & Paginate 10 data per halaman
+            $tickets = Ticket::with(['category', 'reporter', 'technician'])->latest()->paginate(10);
             
         } elseif ($user->role === 'teknisi') {
-            // Teknisi: Melihat tiket yang ditugaskan kepadanya 
-            // TETAPI sembunyikan yang statusnya sudah selesai/ditolak
-            $tickets = Ticket::where(function($query) use ($user) {
-                $query->where('technician_id', $user->id)
-                      ->whereNotIn('status', ['Rejected', 'Resolved', 'Closed']);
-            })->orWhere(function($query) use ($user) {
-                // Tambahan: Jika teknisi membuat tiketnya sendiri sebagai pelapor, tetap tampilkan semua
-                $query->where('reporter_id', $user->id);
-            })->latest()->get();
+            $tickets = Ticket::with(['category', 'reporter', 'technician'])
+                ->where(function($query) use ($user) {
+                    $query->where('technician_id', $user->id)
+                          ->whereNotIn('status', ['Rejected', 'Resolved', 'Closed']);
+                })->orWhere(function($query) use ($user) {
+                    $query->where('reporter_id', $user->id);
+                })->latest()->paginate(10);
             
         } else {
-            // Karyawan (User): Melihat semua riwayat tiket miliknya sendiri
-            $tickets = Ticket::where('reporter_id', $user->id)->latest()->get();
+            // Karyawan (User)
+            $tickets = Ticket::with(['category', 'reporter', 'technician'])
+                ->where('reporter_id', $user->id)->latest()->paginate(10);
         }
 
         return view('tickets.index', compact('tickets'));

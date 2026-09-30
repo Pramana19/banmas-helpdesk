@@ -12,7 +12,8 @@ class UserController extends Controller
     {
         if (auth()->user()->role !== 'admin') abort(403);
         
-        $users = User::latest()->get();
+        // Ganti get() menjadi paginate(10)
+        $users = User::latest()->paginate(10);
         return view('users.index', compact('users'));
     }
 
