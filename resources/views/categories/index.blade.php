@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-[#12544F] leading-tight">
                 {{ __('Kelola Kategori Tiket') }}
             </h2>
-            <a href="{{ route('categories.create') }}" class="bg-[#12544F] text-[#EDEDCE] hover:bg-[#8BBB92] hover:text-[#12544F] font-bold py-2 px-4 rounded-md transition-all shadow-sm text-sm">
+            <a href="{{ route('categories.create') }}" class="bg-blue-600 text-white hover:bg-blue-800 font-bold py-2 px-4 rounded-md transition-all shadow-sm text-sm border border-transparent dark:border-blue-400/40">
                 + Tambah Kategori
             </a>
         </div>
