@@ -12,7 +12,7 @@
 
     <div class="py-12" x-data="{ editingId: null }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
+
             @if(session('success'))
                 <div class="mb-4 bg-[#8BBB92]/30 border border-[#8BBB92] text-[#12544F] font-bold px-4 py-3 rounded-xl relative shadow-sm">
                     {{ session('success') }}
@@ -25,23 +25,25 @@
                 </div>
             @endif
 
-            <div class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm sm:rounded-2xl border border-[#8BBB92]/40">
+            <div class="bg-[#2159b3] dark:bg-slate-500 backdrop-blur-sm overflow-hidden shadow-sm sm:rounded-2xl border border-[#8BBB92]/40 dark:border-slate-700 transition-colors duration-200">
                 <div class="p-6 text-gray-900 overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-l-lg">Pengguna</th>
-                                <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider">Email</th>
-                                <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider">Role</th>
-                                <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-r-lg">Aksi & Role</th>
+                                <!-- Header Tabel: Dipertahankan mode gelapnya, mode terang tetap seperti bawaan -->
+                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-l-lg transition-colors duration-200">Pengguna</th>
+                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Email</th>
+                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Role</th>
+                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-r-lg transition-colors duration-200">Aksi & Role</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white/50 divide-y divide-gray-200">
+                        <!-- Body Tabel: Mengubah bg-white/50 menjadi bg-gray-50 agar lebih tebal/hidup di mode terang -->
+                        <tbody class="bg-gray-50 dark:bg-white/50 divide-y divide-gray-200">
                             @foreach($users as $user)
-                            <tr>
+                            <tr class="hover:bg-gray-100 dark:hover:bg-transparent transition-colors duration-150">
                                 <!-- Kolom Pengguna (Avatar + Form Edit Nama) -->
                                 <td class="px-6 py-4 whitespace-nowrap text-sm flex items-center gap-4" x-data="{ name: '{{ $user->name }}' }">
-                                    
+
                                     <!-- Menampilkan Avatar -->
                                     <div class="flex-shrink-0 h-10 w-10">
                                         @if($user->avatar)
@@ -77,7 +79,7 @@
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $user->email }}</td>
-                                
+
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full {{ $user->role === 'admin' ? 'bg-red-100 text-red-800' : ($user->role === 'teknisi' ? 'bg-[#8BBB92]/40 text-[#12544F]' : 'bg-gray-100 text-gray-800') }}">
                                         {{ $user->role === 'user' ? 'Karyawan' : ucfirst($user->role) }}
@@ -99,7 +101,7 @@
                                             <button type="submit" :disabled="editingId === {{ $user->id }}" :class="editingId === {{ $user->id }} ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#8BBB92] hover:text-[#12544F]'" class="bg-[#12544F] text-[#EDEDCE] px-3 py-1.5 rounded-md transition-all font-semibold text-xs shadow-sm">Update</button>
                                         </form>
 
-                                        <!-- Form Reset Sandi (Logika JS disederhanakan) -->
+                                        <!-- Form Reset Sandi -->
                                         <form action="{{ route('users.resetPassword', $user->id) }}" method="POST" class="inline-block" x-data @submit.prevent="let newPass = prompt('Masukkan password BARU untuk pengguna {{ $user->name }} (Minimal 8 karakter):'); if(newPass) { if(newPass.length < 8) { alert('Gagal: Password minimal 8 karakter!'); } else { $refs.passInput.value = newPass; $el.submit(); } }">
                                             @csrf @method('PATCH')
                                             <input type="hidden" name="password" x-ref="passInput">
@@ -117,7 +119,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+
                     <!-- AREA PAGINATE -->
                     <div class="mt-6">
                         {{ $users->links() }}
