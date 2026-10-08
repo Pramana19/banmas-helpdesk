@@ -31,18 +31,18 @@
                         <thead>
                             <tr>
                                 <!-- Header Tabel: Dipertahankan mode gelapnya, mode terang tetap seperti bawaan -->
-                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-l-lg transition-colors duration-200">Pengguna</th>
+                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-tl-lg transition-colors duration-200">Pengguna</th>
                                 <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Email</th>
                                 <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Role</th>
-                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-r-lg transition-colors duration-200">Aksi & Role</th>
+                                <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-tr-lg transition-colors duration-200">Aksi & Role</th>
                             </tr>
                         </thead>
                         <!-- Body Tabel: Mengubah bg-white/50 menjadi bg-gray-50 agar lebih tebal/hidup di mode terang -->
-                        <tbody class="bg-gray-50 dark:bg-white/50 divide-y divide-gray-200">
+                        <tbody class="bg-stone-300 dark:bg-white/50 divide-y divide-gray-200">
                             @foreach($users as $user)
                             <tr class="hover:bg-gray-100 dark:hover:bg-transparent transition-colors duration-150">
                                 <!-- Kolom Pengguna (Avatar + Form Edit Nama) -->
-                                <td class="px-6 py-4 whitespace-nowrap text-sm flex items-center gap-4" x-data="{ name: '{{ $user->name }}' }">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm flex items-center gap-4 {{ $loop->last ? 'rounded-bl-lg' : '' }}" x-data="{ name: '{{ $user->name }}' }">
 
                                     <!-- Menampilkan Avatar -->
                                     <div class="flex-shrink-0 h-10 w-10">
@@ -86,7 +86,7 @@
                                     </span>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap text-sm flex gap-2 items-center">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm flex gap-2 items-center {{ $loop->last ? 'rounded-br-lg' : '' }}">
                                     @if($user->id === auth()->id())
                                         <span class="text-xs text-gray-400 italic bg-gray-50 px-3 py-1.5 rounded border border-gray-200 inline-block">Admin Utama (Terkunci)</span>
                                     @else
