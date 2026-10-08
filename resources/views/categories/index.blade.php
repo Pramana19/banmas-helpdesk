@@ -20,21 +20,25 @@
                 </div>
             @endif
 
-            <div class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm sm:rounded-2xl border border-[#8BBB92]/40">
+            <!-- Wrapper Utama: Disesuaikan dengan file users -->
+            <div class="bg-[#2159b3] dark:bg-slate-500 backdrop-blur-sm overflow-hidden shadow-sm sm:rounded-2xl border border-[#8BBB92]/40 dark:border-slate-700 transition-colors duration-200">
                 <div class="p-6 text-gray-900">
                     @if($categories->isEmpty())
-                        <p class="text-gray-500 text-center py-4">Belum ada kategori tiket.</p>
+                        <p class="text-gray-500 dark:text-gray-300 text-center py-4">Belum ada kategori tiket.</p>
                     @else
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-l-lg">Nama Kategori</th>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-r-lg">Aksi (Edit / Hapus)</th>
+                                    <!-- Header Tabel: Disesuaikan dengan file users -->
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-l-lg transition-colors duration-200">Nama Kategori</th>
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-r-lg transition-colors duration-200">Aksi (Edit / Hapus)</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white/50 divide-y divide-gray-200">
+                            <!-- Body Tabel: Disesuaikan dengan file users -->
+                            <tbody class="bg-gray-50 dark:bg-white/50 divide-y divide-gray-200 dark:divide-slate-700">
                                 @foreach($categories as $category)
-                                <tr>
+                                <!-- Row Hover: Disesuaikan dengan file users -->
+                                <tr class="hover:bg-gray-100 dark:hover:bg-transparent transition-colors duration-150">
                                     <!-- Form Edit Kategori dengan Kontrol Alpine.js -->
                                     <td class="px-6 py-4 whitespace-nowrap text-sm" x-data="{ name: '{{ $category->name }}' }">
                                         <form action="{{ route('categories.update', $category->id) }}" method="POST" class="flex items-center gap-2"
@@ -45,7 +49,7 @@
                                             <!-- Kotak Teks: Disabled jika bukan ID yang sedang diedit -->
                                             <input type="text" name="name" x-model="name" 
                                                    :disabled="editingId !== {{ $category->id }}"
-                                                   :class="editingId === {{ $category->id }} ? 'bg-white border-[#12544F] ring-1 ring-[#12544F]' : 'bg-gray-100 text-gray-500 cursor-not-allowed border-gray-200'"
+                                                   :class="editingId === {{ $category->id }} ? 'bg-white border-[#12544F] ring-1 ring-[#12544F]' : 'bg-transparent text-gray-500 dark:text-gray-300 border-transparent'"
                                                    class="text-sm rounded-md py-1 px-2 font-medium w-64 transition-all">
 
                                             <!-- Tombol Aksi Berdasarkan Kondisi Edit -->

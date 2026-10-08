@@ -69,25 +69,32 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
                 <!-- Tabel 5 Tiket Terbaru -->
-                <div class="{{ auth()->user()->role !== 'user' ? 'lg:col-span-2' : 'lg:col-span-3' }} bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-[#8BBB92]/40 p-6 overflow-x-auto">
+                <div class="{{ auth()->user()->role !== 'user' ? 'lg:col-span-2' : 'lg:col-span-3' }} bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-[#8BBB92]/40 p-6 overflow-x-auto">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-[#12544F]">Tiket Terbaru</h3>
                         <a href="{{ route('tickets.index') }}" class="text-sm text-blue-600 hover:underline">Lihat Semua &rarr;</a>
                     </div>
                     
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50/50">
+                        <thead>
                             <tr>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No. Tiket</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                <!-- Kolom Pertama: px-4, rounded-l-lg -->
+                                <th class="px-4 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-tl-lg transition-colors duration-200">No. Tiket</th>
+                                
+                                <!-- Kolom Tengah: px-4, tanpa rounded -->
+                                <th class="px-4 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Kategori</th>
+                                
+                                <!-- Kolom Tengah: px-4, tanpa rounded -->
+                                <th class="px-4 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Status</th>
+                                
+                                <!-- Kolom Terakhir: px-4, rounded-r-lg -->
+                                <th class="px-4 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-tr-lg transition-colors duration-200">Tanggal</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white/50 divide-y divide-gray-200">
+                        <tbody class="bg-stone-300 divide-y dark:bg-stone-400 divide-gray-200 ">
                             @forelse($recentTickets as $ticket)
                             <tr class="hover:bg-[#8BBB92]/10 transition-colors">
-                                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[#12544F]">
+                                <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[#12544F] {{ $loop->last ? 'rounded-bl-lg' : '' }}">
                                     <a href="{{ route('tickets.show', $ticket->id) }}" class="hover:underline">{{ $ticket->ticket_number }}</a>
                                 </td>
                                 <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">{{ $ticket->category->name ?? 'Lainnya' }}</td>
@@ -98,11 +105,11 @@
                                         {{ $ticket->status }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{{ $ticket->created_at->format('d M Y') }}</td>
+                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500 {{ $loop->last ? 'rounded-br-lg' : '' }}">{{ $ticket->created_at->format('d M Y') }}</td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="px-4 py-6 text-center text-sm text-gray-500">Belum ada tiket bantuan.</td>
+                                <td colspan="4" class="px-4 py-6 text-center text-sm text-gray-500 rounded-b-lg">Belum ada tiket bantuan.</td>
                             </tr>
                             @endforelse
                         </tbody>

@@ -19,25 +19,28 @@
                 </div>
             @endif
 
-            <div class="bg-white/90 backdrop-blur-sm overflow-hidden shadow-sm sm:rounded-2xl border border-[#8BBB92]/40">
+            <!-- Wrapper Utama: Disesuaikan dengan file users -->
+            <div class="bg-[#2159b3] dark:bg-slate-500 backdrop-blur-sm overflow-hidden shadow-sm sm:rounded-2xl border border-[#8BBB92]/40 dark:border-slate-700 transition-colors duration-200">
                 <div class="p-6 text-gray-900 overflow-x-auto">
                     @if($tickets->isEmpty())
-                        <p class="text-gray-500 text-center py-4">Belum ada tiket bantuan yang dibuat.</p>
+                        <p class="text-white dark:text-gray-300 text-center py-4">Belum ada tiket bantuan yang dibuat.</p>
                     @else
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-l-lg">Pelapor & Tiket</th>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider">Judul Kendala</th>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider">Prioritas</th>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider">Status</th>
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-r-lg">Tanggal</th>
+                                    <!-- Header Tabel: Disesuaikan dengan file users -->
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-l-lg transition-colors duration-200">Pelapor & Tiket</th>
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Judul Kendala</th>
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Prioritas</th>
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Status</th>
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider transition-colors duration-200">Tanggal</th>
                                     @if(auth()->user()->role === 'admin')
-                                    <th class="px-6 py-3 bg-[#12544F]/5 text-left text-xs font-bold text-[#12544F] uppercase tracking-wider rounded-r-lg">Aksi</th>
+                                    <th class="px-6 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-r-lg transition-colors duration-200">Aksi</th>
                                     @endif
                                 </tr>
                             </thead>
-                            <tbody class="bg-white/50 divide-y divide-gray-200">
+                            <!-- Body Tabel: Disesuaikan dengan file users -->
+                            <tbody class="bg-gray-50 dark:bg-white/50 divide-y divide-gray-200 dark:divide-slate-700">
                                 @foreach($tickets as $ticket)
                                 @php
                                     $badgeType = ''; $badgeText = '';
@@ -49,7 +52,8 @@
                                         }
                                     }
                                 @endphp
-                                <tr>
+                                <!-- Row Hover: Disesuaikan dengan file users -->
+                                <tr class="hover:bg-gray-100 dark:hover:bg-transparent transition-colors duration-150">
                                     <!-- Kolom Pelapor & Tiket (Dengan Avatar) -->
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -61,9 +65,9 @@
                                                 @endif
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-semibold text-gray-900">{{ $ticket->reporter->name }}</div>
+                                                <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $ticket->reporter->name }}</div>
                                                 <div class="flex items-center gap-2 mt-1">
-                                                    <a href="{{ route('tickets.show', $ticket->id) }}" class="text-[#12544F] hover:underline font-bold text-xs">
+                                                    <a href="{{ route('tickets.show', $ticket->id) }}" class="text-[#12544F] dark:text-[#EDEDCE] hover:underline font-bold text-xs">
                                                         {{ $ticket->ticket_number }}
                                                     </a>
                                                     @if($badgeText)
@@ -74,7 +78,7 @@
                                         </div>
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $ticket->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{{ $ticket->title }}</td>
                                     
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                                         <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">{{ ucfirst($ticket->priority) }}</span>
@@ -86,13 +90,13 @@
                                         </span>
                                     </td>
                                     
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $ticket->created_at->format('d M Y H:i') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $ticket->created_at->format('d M Y H:i') }}</td>
                                     
                                     @if(auth()->user()->role === 'admin')
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <form action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin hapus tiket {{ $ticket->ticket_number }} secara permanen?');">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-md text-xs font-bold">Hapus</button>
+                                            <button type="submit" class="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-md text-xs font-bold transition-colors">Hapus</button>
                                         </form>
                                     </td>
                                     @endif
