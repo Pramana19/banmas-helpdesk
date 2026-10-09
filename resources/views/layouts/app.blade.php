@@ -36,9 +36,17 @@
                             </div>
                         </div>
 
-                        <!-- Bagian Bawah: Watermark -->
-                        <div class="mt-8 text-center text-xs font-bold text-slate-500 dark:text-slate-400">
-                            &copy; 2026 BanMas Helpdesk
+                        <!-- Bagian Bawah: Tombol Kembali & Watermark -->
+                        <div class="mt-8 flex flex-col items-center gap-3">
+                            <!-- Tombol Kembali: Menggunakan window.history.back() agar cepat tanpa membebani server -->
+                            <button onclick="window.history.back()" class="bg-indigo-600 dark:bg-indigo-700 text-white font-bold py-1.5 px-6 rounded-md shadow-sm transition-all hover:bg-indigo-600 dark:hover:bg-indigo-600 text-xs border border-transparent dark:border-slate-500/40">
+                                Kembali
+                            </button>
+                            
+                            <!-- Teks Copyright (Watermark) tetap di posisinya -->
+                            <div class="text-center text-[10px] font-bold text-slate-500 dark:text-slate-400">
+                                &copy; 2026 BanMas Helpdesk
+                            </div>
                         </div>
 
                     </div>

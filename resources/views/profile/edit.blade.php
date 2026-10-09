@@ -39,12 +39,13 @@
                     @enderror
                 </form>
 
-                <!-- Tombol Hapus (Hanya muncul kalau ada fotonya) -->
+                <!-- Tombol Hapus (Hanya muncul kalau ada fotonya) - Diubah menjadi desain button solid -->
                 @if(auth()->user()->avatar)
                 <form action="{{ route('profile.avatar.destroy') }}" method="POST" class="mt-4">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-xs font-semibold text-red-500 hover:text-red-700 transition-colors">
+                    <!-- Perubahan dari teks biasa menjadi tombol kotak -->
+                    <button type="submit" class="bg-red-600 hover:bg-red-500 text-white font-bold py-1.5 px-4 rounded-md shadow-sm transition-colors text-xs border border-transparent dark:border-red-400/40">
                         Hapus Foto
                     </button>
                 </form>
@@ -57,13 +58,14 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <!-- Ubah dark:bg-slate-900/90 menjadi dark:bg-slate-900 agar pekat/tidak transparan -->
+            <div class="p-4 sm:p-8 bg-stone-400 dark:bg-slate-900 backdrop-blur-sm shadow sm:rounded-2xl border-2 border-stone-300 dark:border-slate-700 transition-colors duration-200 [&>div]:bg-transparent">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-stone-400 dark:bg-slate-900 backdrop-blur-sm shadow sm:rounded-2xl border-2 border-stone-300 dark:border-slate-700 transition-colors duration-200 [&>div]:bg-transparent">
                 <div class="max-w-xl">
                     @include('profile.partials.update-password-form')
                 </div>

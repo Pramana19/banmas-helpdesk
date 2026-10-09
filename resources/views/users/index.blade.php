@@ -38,9 +38,9 @@
                             </tr>
                         </thead>
                         <!-- Body Tabel: Mengubah bg-white/50 menjadi bg-gray-50 agar lebih tebal/hidup di mode terang -->
-                        <tbody class="bg-stone-300 dark:bg-white/50 divide-y divide-gray-200">
+                        <tbody class="bg-stone-300 dark:bg-stone-400 divide-y divide-gray-200">
                             @foreach($users as $user)
-                            <tr class="hover:bg-gray-100 dark:hover:bg-transparent transition-colors duration-150">
+                            <tr class="hover:bg-gray-100 dark:hover:bg-slate-300/60 transition-colors duration-150">
                                 <!-- Kolom Pengguna (Avatar + Form Edit Nama) -->
                                 <td class="px-6 py-4 whitespace-nowrap text-sm flex items-center gap-4 {{ $loop->last ? 'rounded-bl-lg' : '' }}" x-data="{ name: '{{ $user->name }}' }">
 

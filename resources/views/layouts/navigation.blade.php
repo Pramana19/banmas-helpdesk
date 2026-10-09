@@ -5,9 +5,9 @@
             <div class="flex items-center">
                 <!-- Logo Menggunakan PNG Lokal dengan Wadah Background Kontras -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ url('/') }}" class="flex items-center gap-2.5 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-xl shadow-sm border border-slate-200/50 dark:border-slate-700 transition-all">
-                        <img src="{{ asset('images/logo-sawit.png') }}" class="h-7 w-auto object-contain" alt="Logo Sawit">
-                        <span class="font-extrabold text-[#022140] dark:text-white tracking-tight text-lg">BanMas</span>
+                    <a href="{{ url('/') }}" class="flex items-center gap-2.5 bg-gradient-to-r from-red-500 via-purple-800 to-blue-700 bg-[size:400%_400%] animate-gradient-move animate-gradient-move px-3 py-1.5 rounded-xl shadow-sm border border-slate-200/50 dark:border-slate-700 transition-all">
+                        <img src="{{ asset('images/logo-sawit.png') }}" class="h-7 w-auto object-contain filter drop-shadow-[0_0_1px_#ffffff] drop-shadow-[0_0_1px_#ffffff] drop-shadow-[0_0_1px_#ffffff]" alt="Logo Sawit">
+                        <span class="font-extrabold text-white dark:text-white tracking-tight text-lg">BanMas</span>
                     </a>
                 </div>
 
@@ -34,7 +34,7 @@
             <div class="hidden sm:flex sm:items-center sm:space-x-3 sm:ms-4">
                 
                 <!-- Tombol Toggle Dark/Light Mode Tunggal -->
-                <button @click="darkMode = !darkMode" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 dark:bg-slate-800 text-white dark:text-slate-200 hover:bg-white/20 dark:hover:bg-slate-700 transition-all shadow-sm border border-white/20 dark:border-slate-700 font-semibold text-xs">
+                <button @click="darkMode = !darkMode" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-900 dark:bg-indigo-900 text-white dark:text-slate-200 hover:bg-white/20 dark:hover:bg-slate-700 transition-all shadow-sm border border-white/20 dark:border-slate-700 font-semibold text-xs">
                     <!-- Ikon Matahari -->
                     <svg x-show="!darkMode" class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -49,7 +49,7 @@
                 <!-- Dropdown Profil User -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center p-1 border border-white/20 dark:border-slate-700 text-sm leading-4 font-medium rounded-full text-white bg-white/10 dark:bg-slate-800 hover:bg-white/20 dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center p-1 border border-white/20 dark:border-slate-700 text-sm leading-4 font-medium rounded-full text-white bg-indigo-900 dark:bg-indigo-900 hover:bg-white/20 dark:hover:text-white focus:outline-none transition ease-in-out duration-150">
                             
                             <!-- Logika Penampil Avatar Mini -->
                             @if(Auth::user()->avatar)

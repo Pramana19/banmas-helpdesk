@@ -15,6 +15,16 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            // 🔽 TAMBAHKAN KEYFRAMES & ANIMASI DI SINI 🔽
+            keyframes: {
+                'gradient-shift': {
+                    '0%, 100%': { 'background-position': '0% 50%' },
+                    '50%': { 'background-position': '100% 50%' },
+                },
+            },
+            animation: {
+                'gradient-move': 'gradient-shift 8s ease infinite', // 8s bikin gerakannya smooth kayak diaduk pelan
+            },
         },
     },
 

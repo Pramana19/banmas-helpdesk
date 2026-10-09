@@ -38,7 +38,7 @@
                             <tbody class="bg-stone-300 dark:bg-stone-400 divide-y divide-gray-200">
                                 @foreach($categories as $category)
                                 <!-- Row Hover: Disesuaikan dengan file users -->
-                                <tr class="hover:bg-gray-100 dark:hover:bg-transparent transition-colors duration-150">
+                                <tr class="hover:bg-gray-100 dark:hover:bg-slate-300/60 transition-colors duration-150">
                                     <!-- Form Edit Kategori dengan Kontrol Alpine.js -->
                                     <td class="px-6 py-4 whitespace-nowrap text-sm {{ $loop->last ? 'rounded-bl-lg' : '' }}" x-data="{ name: '{{ $category->name }}' }">
                                         <form action="{{ route('categories.update', $category->id) }}" method="POST" class="flex items-center gap-2"
