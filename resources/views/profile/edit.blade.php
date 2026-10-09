@@ -50,6 +50,12 @@
                     </button>
                 </form>
                 @endif
+                <!-- TOMBOL KEMBALI KHUSUS HALAMAN PROFILE -->
+                <div class="mt-60 w-full flex justify-center">
+                    <button onclick="window.location.href='{{ route('dashboard') }}'" class="bg-indigo-600 dark:bg-indigo-700 text-white font-bold py-1.5 px-6 rounded-md shadow-sm transition-all hover:bg-indigo-600 dark:hover:bg-indigo-600 text-xs border border-transparent dark:border-slate-500/40">
+                        Kembali
+                    </button>
+                </div>
             </div>
         </div>
     </x-slot>

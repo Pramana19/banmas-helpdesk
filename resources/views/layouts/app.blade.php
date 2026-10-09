@@ -34,19 +34,10 @@
                             <div class="[&>div]:!flex-col [&>div]:!items-center [&>div]:!justify-center [&>div]:!gap-5 [&>div]:!w-full [&_h2]:text-[#022140] dark:[&_h2]:text-white dark:[&_h2]:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] [&_h2]:font-bold [&_h2]:text-lg [&_h2]:text-center transition-all w-full">
                                 {{ $header }}
                             </div>
-                        </div>
-
-                        <!-- Bagian Bawah: Tombol Kembali & Watermark -->
-                        <div class="mt-8 flex flex-col items-center gap-3">
-                            <!-- Tombol Kembali: Menggunakan window.history.back() agar cepat tanpa membebani server -->
-                            <button onclick="window.history.back()" class="bg-indigo-600 dark:bg-indigo-700 text-white font-bold py-1.5 px-6 rounded-md shadow-sm transition-all hover:bg-indigo-600 dark:hover:bg-indigo-600 text-xs border border-transparent dark:border-slate-500/40">
-                                Kembali
-                            </button>
-                            
-                            <!-- Teks Copyright (Watermark) tetap di posisinya -->
-                            <div class="text-center text-[10px] font-bold text-slate-500 dark:text-slate-400">
-                                &copy; 2026 BanMas Helpdesk
-                            </div>
+                        </div>                         
+                        <!-- Teks Copyright (Watermark) tetap di posisinya -->
+                        <div class="text-center text-[10px] font-bold text-slate-500 dark:text-slate-400">
+                            &copy; 2026 BanMas Helpdesk
                         </div>
 
                     </div>
