@@ -91,7 +91,7 @@
                                 <th class="px-4 py-3 bg-[#12544F] dark:bg-[#12544F] text-left text-xs font-bold text-[#EDEDCE] dark:text-[#EDEDCE] uppercase tracking-wider rounded-tr-lg transition-colors duration-200">Tanggal</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-stone-300 divide-y dark:bg-stone-400 divide-gray-200 ">
+                        <tbody class="bg-stone-300 divide-y dark:bg-stone-400 divide-y divide-gray-200 ">
                             @forelse($recentTickets as $ticket)
                             <tr class="hover:bg-[#8BBB92]/10 transition-colors">
                                 <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[#12544F] {{ $loop->last ? 'rounded-bl-lg' : '' }}">
