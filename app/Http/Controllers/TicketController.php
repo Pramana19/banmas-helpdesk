@@ -62,11 +62,31 @@ class TicketController extends Controller
             'priority' => 'required|string',
             'location' => 'nullable|string|max:255',
             'description' => 'required|string',
+            // Validasi file: Maks 5 file, tiap file wajib gambar/pdf, maks 10MB (10240 KB)
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf,mp4,webm|max:20480', // 20480 KB = 20 MB
         ]);
+
+        // Proses penyimpanan file lampiran (jika ada)
+        $attachmentPaths = [];
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                // Simpan file ke dalam folder 'tickets' di storage public
+                $path = $file->store('tickets', 'public');
+                $attachmentPaths[] = $path;
+            }
+        }
 
         $validated['ticket_number'] = 'TKT-' . date('Ymd') . '-' . rand(100, 999);
         $validated['reporter_id'] = auth()->id();
         $validated['status'] = 'Open';
+        
+        // Konversi array path menjadi JSON string agar muat disimpan di 1 kolom database
+        $validated['attachment'] = !empty($attachmentPaths) ? json_encode($attachmentPaths) : null;
+
+        // Kita hapus key 'attachments' (pakai 's') dari array $validated agar tidak error mass-assignment, 
+        // karena nama kolom di DB adalah 'attachment' (tanpa 's')
+        unset($validated['attachments']);
 
         Ticket::create($validated);
 
